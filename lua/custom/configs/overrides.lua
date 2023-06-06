@@ -22,15 +22,21 @@ M.mason = {
 
 M.nvimtree = {
   hijack_unnamed_buffer_when_opening = false,
+  reload_on_bufenter = true,
+  hijack_directories = {
+    enable = true,
+    auto_open = false,
+  },
+  update_focused_file = {
+    enable = true,
+    update_cwd = false,
+  },
   view ={
     side = "right",
   },
   git = {
     enable = true,
-  },
-  hijack_directories = {
-    enable = true,
-    auto_open = false,
+    ignore = false,
   },
   renderer = {
     highlight_git = false,

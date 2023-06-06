@@ -28,6 +28,16 @@ M.general = {
     ["WW"] = { ":wq<enter>", "Close without saving"},
     ["<B>"] = { "$", "beginning of line" },
     ["<E>"] = { "^", "end of line" },
+    ["<Leader>ll"] = {
+      function()
+        require("lsp_lines").toggle()
+      end,
+       "Toggle lsp_lines",
+    },
+    ["<leader>Du"]= { "<Cmd>DBUIToggle<Cr>", "Toggle UI" },
+    ["<leader>Df"] = { "<Cmd>DBUIFindBuffer<Cr>", "Find buffer" },
+    ["<leader>Dr"] = { "<Cmd>DBUIRenameBuffer<Cr>", "Rename buffer" },
+    ["<leader>Dq"] = { "<Cmd>DBUILastQueryInfo<Cr>", "Last query info" },
   },
 
   v = {

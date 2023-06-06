@@ -147,7 +147,51 @@ local plugins = {
     dependencies = { "zbirenbaum/copilot.lua", }, -- or 
     lazy = true,
     event = "BufReadPost",
+
   },
+
+  {
+    "ErichDonGubler/lsp_lines.nvim",
+    event = "VimEnter",
+    config = function()
+      require("lsp_lines").setup()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "*" }, --ini untuk file yang tidak ingin dibaca
+        callback = function()
+          local exclude_ft = {
+            "lazy",
+          }
+          if vim.tbl_contains(exclude_ft, vim.o.filetype) then
+            vim.diagnostic.config({ virtual_lines = false })
+          else
+            vim.diagnostic.config({ virtual_lines = true })
+          end
+        end,
+      })
+    end,
+  },
+  {
+   "tpope/vim-dadbod",
+    -- opt = true,
+    requires = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+    config = function()
+
+      vim.g.db_ui_save_location = vim.fn.stdpath "config" .. require("plenary.path").path.sep .. "db_ui"
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "sql",
+        },
+        command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+      })
+
+    end,
+    cmd = { "DBUIToggle", "DBUI", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
+  },
+
 }
 
 return plugins
